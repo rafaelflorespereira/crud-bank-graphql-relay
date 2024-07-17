@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@loadable/component": "^5.15.3",
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-popover": "^1.0.6",
     "@radix-ui/react-slot": "^1.0.2",
     "@tanstack/react-query": "^4.29.3",
@@ -29,6 +30,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
+    "react-hook-form": "^7.52.1",
     "react-i18next": "^13.2.2",
     "react-relay": "^17.0.0",
     "react-router-dom": "^6.10.0",
