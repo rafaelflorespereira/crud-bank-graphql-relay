@@ -19,15 +19,24 @@ type ChartDataType = {
 export default function Dashboard() {
   const { t } = useTranslation('translation')
   const {
-    accounts: [{ accountNumber, currentBalance, credits, debits, transactions }],
+    accounts: [
+      {
+        user: { name },
+        accountNumber,
+        currentBalance,
+        credits,
+        debits,
+        transactions,
+      },
+    ],
   } = mockData
 
   const chartConfig = {
-    credits: {
+    credit: {
       label: 'Credits',
       color: 'hsl(var(--positive))',
     },
-    debits: {
+    debit: {
       label: 'Debits',
       color: 'hsl(var(--destructive))',
     },
@@ -62,6 +71,9 @@ export default function Dashboard() {
 
   return (
     <div>
+      <section className="my-8">
+        <h3 className="mb-4 text-lg font-semibold text-white">Hello {name}</h3>
+      </section>
       <DashboardCard title={'Balance'} amount={currentBalance} />
       <DashboardCard title={`${debits.total} Debits`} amount={debits.amount} />
       <DashboardCard title={`${credits.total} credits`} amount={credits.amount} />
@@ -79,8 +91,8 @@ export default function Dashboard() {
             />
             <ChartTooltip content={<ChartTooltipContent />} />
             <ChartLegend content={<ChartLegendContent />} />
-            <Bar dataKey="credit" stackId="a" fill={chartConfig.credits.color} />
-            <Bar dataKey="debit" stackId="a" fill={chartConfig.debits.color} />
+            <Bar dataKey="credit" fill={chartConfig.credit.color} />
+            <Bar dataKey="debit" fill={chartConfig.debit.color} />
           </BarChart>
         </ChartContainer>
       </section>
