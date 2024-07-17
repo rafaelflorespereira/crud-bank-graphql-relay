@@ -8,6 +8,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from 'src/components/ui/chart'
+import { Table, TableBody, TableHeader } from 'src/components/ui/table'
 import { mockData } from 'src/data/account'
 import { Transaction } from 'src/interfaces'
 
@@ -95,6 +96,40 @@ export default function Dashboard() {
             <Bar dataKey="debit" fill={chartConfig.debit.color} />
           </BarChart>
         </ChartContainer>
+      </section>
+
+      <section>
+        <h3 className="mb-4 text-lg font-semibold text-white">Transaction Details</h3>
+        <Table className="border">
+          <TableHeader></TableHeader>
+          <TableBody>
+            {transactions.map((transaction, index) => {
+              const {
+                type,
+                amount,
+                to: {
+                  user: { name, email },
+                },
+              } = transaction
+              return (
+                <tr key={index} className="border-b ">
+                  <div className="flex flex-col">
+                    <h4 className="text-base text-white">{name}</h4>
+                    <td className="text-sm text-muted">{email}</td>
+                  </div>
+                  <td className="py-4 text-muted-foreground">
+                    {Intl.DateTimeFormat('en-US', {
+                      month: 'short',
+                      day: '2-digit',
+                      year: 'numeric',
+                    }).format(new Date(transaction.date))}
+                  </td>
+                  <td className="py-4 text-white">{type === 'credit' ? '+' : '-' + amount}</td>
+                </tr>
+              )
+            })}
+          </TableBody>
+        </Table>
       </section>
     </div>
   )
