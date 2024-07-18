@@ -19,7 +19,4 @@ export interface Account {
   transactions: Transaction[]
   debits: { amount: number; total: number; transactions: Transaction[] }
   credits: { amount: number; total: number; transactions: Transaction[] }
-  numberOfTransactions: number
-  numberOfDebits: number
-  numberOfCredits: number
 }

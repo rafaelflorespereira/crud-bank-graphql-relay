@@ -51,12 +51,9 @@ const generateAccount = (user: User): Account => {
     transactions,
     debits: { amount: 0, total: 0, transactions: [] },
     credits: { amount: 0, total: 0, transactions: [] },
-    numberOfTransactions: 0,
-    numberOfDebits: 0,
-    numberOfCredits: 0,
   }
 
-  for (let i = 0; i < getRandomInt(5, 15); i++) {
+  for (let i = 0; i < getRandomInt(20, 50); i++) {
     const transaction = generateTransaction(account, account) // Simplification: from and to are the same account
     transactions.push(transaction)
     if (transaction.type === 'credit') {
@@ -72,8 +69,6 @@ const generateAccount = (user: User): Account => {
   account.credits.transactions = orderTransactionsByDate(account.credits.transactions)
   account.debits.transactions = orderTransactionsByDate(account.debits.transactions)
   account.transactions = orderTransactionsByDate(transactions)
-
-  account.numberOfTransactions = transactions.length
 
   return account
 }

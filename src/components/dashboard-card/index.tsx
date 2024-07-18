@@ -1,3 +1,4 @@
+import { formattedCurrency } from 'src/lib/utils'
 import { Card, CardHeader, CardDescription, CardTitle } from '../ui/card'
 
 type DashboardCardProps = {
@@ -9,7 +10,6 @@ type DashboardCardProps = {
   className?: string
 }
 export const DashboardCard = ({ amount, title, icon, type, className }: DashboardCardProps) => {
-  const formattedCurrency = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount)
   return (
     <Card className={className}>
       <CardHeader>
@@ -17,7 +17,7 @@ export const DashboardCard = ({ amount, title, icon, type, className }: Dashboar
         <CardTitle
           className={type ? (type === 'credit' ? 'text-[hsl(var(--positive))]' : 'text-destructive') : 'text-white'}
         >
-          {formattedCurrency}
+          {formattedCurrency(amount)}
         </CardTitle>
       </CardHeader>
     </Card>
