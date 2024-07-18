@@ -5,14 +5,20 @@ type DashboardCardProps = {
   amount: number
   icon?: string
   totalNumber?: number
+  type?: string
+  className?: string
 }
-export const DashboardCard = ({ amount, title, icon }: DashboardCardProps) => {
+export const DashboardCard = ({ amount, title, icon, type, className }: DashboardCardProps) => {
   const formattedCurrency = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount)
   return (
-    <Card className="flex-1">
+    <Card className={className}>
       <CardHeader>
         <CardDescription>{title}</CardDescription>
-        <CardTitle>{formattedCurrency}</CardTitle>
+        <CardTitle
+          className={type ? (type === 'credit' ? 'text-[hsl(var(--positive))]' : 'text-destructive') : 'text-white'}
+        >
+          {formattedCurrency}
+        </CardTitle>
       </CardHeader>
     </Card>
   )

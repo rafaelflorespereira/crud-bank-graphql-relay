@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts'
 import { DashboardCard } from 'src/components/dashboard-card'
+import { Button } from 'src/components/ui/button'
 import {
   ChartContainer,
   ChartLegend,
@@ -77,16 +78,27 @@ export default function Dashboard() {
         <div></div>
       </section>
 
-      <section className="flex w-full space-x-4">
-        <DashboardCard title={'Account Balance'} amount={currentBalance} />
-        <DashboardCard title={`${debits.total} Debits in Total`} amount={debits.amount} />
-        <DashboardCard title={`${credits.total} credits in Total`} amount={credits.amount} />
+      <section className="flex w-full flex-row flex-wrap space-x-0 md:flex-nowrap md:space-x-4">
+        <DashboardCard className="w-full md:w-1/3" title={'Account Balance'} amount={currentBalance} />
+        <DashboardCard
+          className="order-3 w-1/2 md:w-1/3"
+          title={`${debits.total} Debits in Total`}
+          amount={debits.amount}
+          type="debit"
+        />
+        <DashboardCard
+          className="order-3 w-1/2 md:w-1/3"
+          title={`${credits.total} credits in Total`}
+          amount={credits.amount}
+          type="credit"
+        />
+        <Button className="order-2 w-full self-center uppercase md:order-4 md:text-xl lg:w-1/4">Transfer Money</Button>
       </section>
 
-      <div className="space flex space-x-4 [&>*]:w-1/2 [&>*]:rounded-md [&>*]:border [&>*]:p-4">
-        <section className=" ">
+      <div className="space flex flex-col space-x-0 space-y-8 md:flex-row md:space-x-4 md:space-y-0 [&>*]:w-full [&>*]:rounded-md [&>*]:border [&>*]:p-4 md:[&>*]:w-1/2">
+        <section>
           <h3 className="mb-4 text-lg font-semibold text-white">Total Transactions</h3>
-          <ChartContainer config={chartConfig} className="min-h-[200px] ">
+          <ChartContainer config={chartConfig} className="min-h-[100px] ">
             <BarChart accessibilityLayer data={formatTransactionsToChartData(transactions)}>
               <CartesianGrid vertical={false} />
               <XAxis
@@ -102,7 +114,7 @@ export default function Dashboard() {
             </BarChart>
           </ChartContainer>
         </section>
-        <section className="rounded-md border p-4">
+        <section>
           <h3 className="mb-4 text-lg font-semibold text-white">Transaction Details</h3>
           <Table className="border">
             <TableHeader></TableHeader>
@@ -116,19 +128,19 @@ export default function Dashboard() {
                   },
                 } = transaction
                 return (
-                  <tr key={index} className="border-b">
-                    <div className="flex flex-col p-2">
+                  <tr key={index} className="border-b [&>td]:p-1 md:[&>td]:p-2">
+                    <td className="flex flex-col">
                       <h4 className="text-base text-white">{name}</h4>
                       <td className="text-sm text-muted-foreground">{email}</td>
-                    </div>
-                    <td className="">
+                    </td>
+                    <td>
                       {Intl.DateTimeFormat('en-US', {
                         month: 'short',
                         day: '2-digit',
                         year: 'numeric',
                       }).format(new Date(transaction.date))}
                     </td>
-                    <td className="py-4 text-white">{type === 'credit' ? '+' : '-' + amount}</td>
+                    <td>{type === 'credit' ? '+' : '-' + amount}</td>
                   </tr>
                 )
               })}
