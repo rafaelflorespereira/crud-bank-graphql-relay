@@ -71,66 +71,71 @@ export default function Dashboard() {
   }
 
   return (
-    <div>
+    <main className="p-8 [&>*]:my-8">
       <section className="my-8">
-        <h3 className="mb-4 text-lg font-semibold text-white">Hello {name}</h3>
-      </section>
-      <DashboardCard title={'Balance'} amount={currentBalance} />
-      <DashboardCard title={`${debits.total} Debits`} amount={debits.amount} />
-      <DashboardCard title={`${credits.total} credits`} amount={credits.amount} />
-
-      <section className="my-8">
-        <h3 className="mb-4 text-lg font-semibold text-white">Transactions</h3>
-        <ChartContainer config={chartConfig} className="min-h-[200px]">
-          <BarChart accessibilityLayer data={formatTransactionsToChartData(transactions)}>
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey={'month'}
-              tick={{ fill: 'white' }}
-              tickLine={{ stroke: 'white' }}
-              axisLine={{ stroke: 'white' }}
-            />
-            <ChartTooltip content={<ChartTooltipContent />} />
-            <ChartLegend content={<ChartLegendContent />} />
-            <Bar dataKey="credit" fill={chartConfig.credit.color} />
-            <Bar dataKey="debit" fill={chartConfig.debit.color} />
-          </BarChart>
-        </ChartContainer>
+        <h2 className="mb-4 text-2xl font-semibold text-white">Hello {name}</h2>
+        <div></div>
       </section>
 
-      <section>
-        <h3 className="mb-4 text-lg font-semibold text-white">Transaction Details</h3>
-        <Table className="border">
-          <TableHeader></TableHeader>
-          <TableBody>
-            {transactions.map((transaction, index) => {
-              const {
-                type,
-                amount,
-                to: {
-                  user: { name, email },
-                },
-              } = transaction
-              return (
-                <tr key={index} className="border-b ">
-                  <div className="flex flex-col">
-                    <h4 className="text-base text-white">{name}</h4>
-                    <td className="text-sm text-muted">{email}</td>
-                  </div>
-                  <td className="py-4 text-muted-foreground">
-                    {Intl.DateTimeFormat('en-US', {
-                      month: 'short',
-                      day: '2-digit',
-                      year: 'numeric',
-                    }).format(new Date(transaction.date))}
-                  </td>
-                  <td className="py-4 text-white">{type === 'credit' ? '+' : '-' + amount}</td>
-                </tr>
-              )
-            })}
-          </TableBody>
-        </Table>
+      <section className="flex w-full space-x-4">
+        <DashboardCard title={'Account Balance'} amount={currentBalance} />
+        <DashboardCard title={`${debits.total} Debits in Total`} amount={debits.amount} />
+        <DashboardCard title={`${credits.total} credits in Total`} amount={credits.amount} />
       </section>
-    </div>
+
+      <div className="space flex space-x-4 [&>*]:w-1/2 [&>*]:rounded-md [&>*]:border [&>*]:p-4">
+        <section className=" ">
+          <h3 className="mb-4 text-lg font-semibold text-white">Total Transactions</h3>
+          <ChartContainer config={chartConfig} className="min-h-[200px] ">
+            <BarChart accessibilityLayer data={formatTransactionsToChartData(transactions)}>
+              <CartesianGrid vertical={false} />
+              <XAxis
+                dataKey={'month'}
+                tick={{ fill: 'white' }}
+                tickLine={{ stroke: 'white' }}
+                axisLine={{ stroke: 'white' }}
+              />
+              <ChartTooltip content={<ChartTooltipContent />} />
+              <ChartLegend content={<ChartLegendContent />} />
+              <Bar dataKey="credit" fill={chartConfig.credit.color} />
+              <Bar dataKey="debit" fill={chartConfig.debit.color} />
+            </BarChart>
+          </ChartContainer>
+        </section>
+        <section className="rounded-md border p-4">
+          <h3 className="mb-4 text-lg font-semibold text-white">Transaction Details</h3>
+          <Table className="border">
+            <TableHeader></TableHeader>
+            <TableBody>
+              {transactions.map((transaction, index) => {
+                const {
+                  type,
+                  amount,
+                  to: {
+                    user: { name, email },
+                  },
+                } = transaction
+                return (
+                  <tr key={index} className="border-b">
+                    <div className="flex flex-col p-2">
+                      <h4 className="text-base text-white">{name}</h4>
+                      <td className="text-sm text-muted-foreground">{email}</td>
+                    </div>
+                    <td className="">
+                      {Intl.DateTimeFormat('en-US', {
+                        month: 'short',
+                        day: '2-digit',
+                        year: 'numeric',
+                      }).format(new Date(transaction.date))}
+                    </td>
+                    <td className="py-4 text-white">{type === 'credit' ? '+' : '-' + amount}</td>
+                  </tr>
+                )
+              })}
+            </TableBody>
+          </Table>
+        </section>
+      </div>
+    </main>
   )
 }

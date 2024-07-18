@@ -9,7 +9,7 @@ type DashboardCardProps = {
 export const DashboardCard = ({ amount, title, icon }: DashboardCardProps) => {
   const formattedCurrency = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount)
   return (
-    <Card>
+    <Card className="flex-1">
       <CardHeader>
         <CardDescription>{title}</CardDescription>
         <CardTitle>{formattedCurrency}</CardTitle>
