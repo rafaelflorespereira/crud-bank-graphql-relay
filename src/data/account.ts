@@ -22,7 +22,7 @@ const getRandomEmail = () => {
   return `${name}@${domain}`
 }
 
-const generateUser = (): User => ({
+export const generateUser = (): User => ({
   name: getRandomName(),
   email: getRandomEmail(),
 })
@@ -42,9 +42,10 @@ const orderTransactionsByDate = (transactions: Transaction[]) => {
   })
 }
 
-const generateAccount = (user: User): Account => {
+export const generateAccount = (user: User): Account => {
   const transactions: Transaction[] = []
   const account: Account = {
+    id: '1',
     user,
     accountNumber: uuidv4(),
     currentBalance: getRandomAmount(),

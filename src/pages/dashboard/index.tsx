@@ -1,4 +1,5 @@
-import { useTranslation } from 'react-i18next'
+import { useClientQuery } from 'react-relay'
+import { graphql } from 'relay-runtime'
 import { DashboardCard } from 'src/components/dashboard-card'
 import { TransactionBarChart } from 'src/components/transaction-bar-chart'
 import { TransactionList } from 'src/components/transaction-list'
@@ -6,7 +7,6 @@ import { Button } from 'src/components/ui/button'
 import { mockData } from 'src/data/account'
 
 export default function Dashboard() {
-  const { t } = useTranslation('translation')
   const {
     accounts: [
       {
@@ -19,11 +19,38 @@ export default function Dashboard() {
     ],
   } = mockData
 
+  const accountQuery = graphql`
+    query dashboardQuery($id: ID!) {
+      account(id: $id) {
+        user {
+          name
+        }
+        currentBalance
+        credits {
+          total
+          amount
+        }
+        debits {
+          total
+          amount
+        }
+        transactions {
+          id
+          amount
+          type
+          date
+        }
+      }
+    }
+  `
+
+  const data = useClientQuery(accountQuery, { id: '1' })
+  console.log({ accountQuery: data })
+
   return (
     <main className="p-8 [&>*]:my-8">
       <section className="my-8">
         <h2 className="mb-4 text-2xl font-semibold text-white">Hello {name}</h2>
-        <div></div>
       </section>
 
       <section className="flex w-full flex-row flex-wrap space-x-0 md:flex-nowrap md:space-x-4">

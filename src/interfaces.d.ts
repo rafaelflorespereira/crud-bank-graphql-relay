@@ -12,11 +12,13 @@ export interface Transaction {
   to: Account
 }
 
+type FinancialRecord = { amount: number; total: number; transactions: Transaction[] }
 export interface Account {
-  user: User
+  id: string
   accountNumber: string
+  user: User
   currentBalance: number
   transactions: Transaction[]
-  debits: { amount: number; total: number; transactions: Transaction[] }
-  credits: { amount: number; total: number; transactions: Transaction[] }
+  debits: FinancialRecord
+  credits: FinancialRecord
 }

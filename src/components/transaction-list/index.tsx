@@ -5,7 +5,6 @@ interface TransactionListProps {
   transactions: Transaction[]
 }
 export const TransactionList = ({ transactions }: TransactionListProps) => {
-  console.log(transactions)
   return (
     <section>
       <h3 className="mb-4 text-lg font-semibold text-white">Transaction Details</h3>
@@ -23,7 +22,7 @@ export const TransactionList = ({ transactions }: TransactionListProps) => {
               <tr key={index} className="border-b [&>td]:p-1 md:[&>td]:p-2">
                 <td className="flex flex-col">
                   <h4 className="text-base text-white">{name}</h4>
-                  <td className="text-sm text-muted-foreground">{email}</td>
+                  <p className="text-sm text-muted-foreground">{email}</p>
                 </td>
                 <td>
                   {Intl.DateTimeFormat('en-US', {

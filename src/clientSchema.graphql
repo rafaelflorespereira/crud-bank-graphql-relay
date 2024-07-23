@@ -1,0 +1,41 @@
+# Replace this with your own GraphQL schema file!
+type User {
+  id: ID!
+  name: String!
+  email: String!
+}
+type Transaction {
+  id: ID!
+  amount: Float!
+  type: String!
+  date: String!
+  description: String
+  from: User
+  to: User
+}
+interface FinancialRecord {
+  amount: Float!
+  total: Float!
+  transactions: [Transaction]
+}
+type Debit implements FinancialRecord {
+  amount: Float!
+  total: Float!
+  transactions: [Transaction]
+}
+type Credit implements FinancialRecord {
+  amount: Float!
+  total: Float!
+  transactions: [Transaction]
+}
+type Account {
+  id: ID!
+  user: User
+  currentBalance: Float!
+  credits: [Credit]
+  debits: [Debit]
+  transactions: [Transaction]
+}
+type Query {
+  account(id: ID!): Account
+}
