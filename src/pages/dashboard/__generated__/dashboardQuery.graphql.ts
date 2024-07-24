@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<ade249456c545faabbde56cb09d08fdf>>
+ * @generated SignedSource<<7412a13fc74f71712afc9eeb635ab003>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -14,24 +14,10 @@ export type dashboardQuery$variables = {
 };
 export type dashboardQuery$data = {
   readonly account: {
-    readonly credits: ReadonlyArray<{
-      readonly amount: number;
-      readonly total: number;
-    } | null | undefined> | null | undefined;
     readonly currentBalance: number;
-    readonly debits: ReadonlyArray<{
-      readonly amount: number;
-      readonly total: number;
-    } | null | undefined> | null | undefined;
-    readonly transactions: ReadonlyArray<{
-      readonly amount: number;
-      readonly date: string;
-      readonly id: string;
-      readonly type: string;
-    } | null | undefined> | null | undefined;
     readonly user: {
-      readonly name: string;
-    } | null | undefined;
+      readonly name: string | null | undefined;
+    };
   } | null | undefined;
 };
 export type dashboardQuery = {
@@ -72,71 +58,7 @@ v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "amount",
-  "storageKey": null
-},
-v5 = [
-  {
-    "alias": null,
-    "args": null,
-    "kind": "ScalarField",
-    "name": "total",
-    "storageKey": null
-  },
-  (v4/*: any*/)
-],
-v6 = {
-  "alias": null,
-  "args": null,
-  "concreteType": "Credit",
-  "kind": "LinkedField",
-  "name": "credits",
-  "plural": true,
-  "selections": (v5/*: any*/),
-  "storageKey": null
-},
-v7 = {
-  "alias": null,
-  "args": null,
-  "concreteType": "Debit",
-  "kind": "LinkedField",
-  "name": "debits",
-  "plural": true,
-  "selections": (v5/*: any*/),
-  "storageKey": null
-},
-v8 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
   "name": "id",
-  "storageKey": null
-},
-v9 = {
-  "alias": null,
-  "args": null,
-  "concreteType": "Transaction",
-  "kind": "LinkedField",
-  "name": "transactions",
-  "plural": true,
-  "selections": [
-    (v8/*: any*/),
-    (v4/*: any*/),
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "type",
-      "storageKey": null
-    },
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "date",
-      "storageKey": null
-    }
-  ],
   "storageKey": null
 };
 return {
@@ -169,10 +91,7 @@ return {
                 ],
                 "storageKey": null
               },
-              (v3/*: any*/),
-              (v6/*: any*/),
-              (v7/*: any*/),
-              (v9/*: any*/)
+              (v3/*: any*/)
             ],
             "storageKey": null
           }
@@ -208,15 +127,12 @@ return {
                 "plural": false,
                 "selections": [
                   (v2/*: any*/),
-                  (v8/*: any*/)
+                  (v4/*: any*/)
                 ],
                 "storageKey": null
               },
               (v3/*: any*/),
-              (v6/*: any*/),
-              (v7/*: any*/),
-              (v9/*: any*/),
-              (v8/*: any*/)
+              (v4/*: any*/)
             ],
             "storageKey": null
           }
@@ -235,6 +151,6 @@ return {
 };
 })();
 
-(node as any).hash = "dc0249f6df8daeb686e1fd2ee305febd";
+(node as any).hash = "75ef47a7379fc4261758db2cf57039de";
 
 export default node;

@@ -1,8 +1,8 @@
 # Replace this with your own GraphQL schema file!
 type User {
   id: ID!
-  name: String!
-  email: String!
+  name: String
+  email: String
 }
 type Transaction {
   id: ID!
@@ -30,7 +30,7 @@ type Credit implements FinancialRecord {
 }
 type Account {
   id: ID!
-  user: User
+  user: User!
   currentBalance: Float!
   credits: [Credit]
   debits: [Debit]
@@ -38,4 +38,5 @@ type Account {
 }
 type Query {
   account(id: ID!): Account
+  users: [User!]!
 }

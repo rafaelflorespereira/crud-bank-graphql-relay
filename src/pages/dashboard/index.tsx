@@ -5,6 +5,7 @@ import { TransactionBarChart } from 'src/components/transaction-bar-chart'
 import { TransactionList } from 'src/components/transaction-list'
 import { Button } from 'src/components/ui/button'
 import { mockData } from 'src/data/account'
+import { dashboard1Query } from './__generated__/dashboard1Query.graphql'
 
 export default function Dashboard() {
   const {
@@ -19,33 +20,30 @@ export default function Dashboard() {
     ],
   } = mockData
 
-  const accountQuery = graphql`
-    query dashboardQuery($id: ID!) {
-      account(id: $id) {
-        user {
+  // const accountQuery = graphql`
+  //   query dashboardQuery($id: ID!) {
+  //     account(id: $id) {
+  //       user {
+  //         name
+  //       }
+  //       currentBalance
+  //     }
+  //   }
+  // `
+
+  // const data = useClientQuery<dashboardQuery>(accountQuery, { id: '1' })
+  // console.log({ accountQuery: data })
+  const usersData = useClientQuery<dashboard1Query>(
+    graphql`
+      query dashboard1Query {
+        users {
           name
         }
-        currentBalance
-        credits {
-          total
-          amount
-        }
-        debits {
-          total
-          amount
-        }
-        transactions {
-          id
-          amount
-          type
-          date
-        }
       }
-    }
-  `
-
-  const data = useClientQuery(accountQuery, { id: '1' })
-  console.log({ accountQuery: data })
+    `,
+    {},
+  )
+  console.log({ usersData })
 
   return (
     <main className="p-8 [&>*]:my-8">

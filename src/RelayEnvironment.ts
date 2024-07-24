@@ -1,4 +1,6 @@
 import { Environment, Network, RecordSource, Store, FetchFunction } from 'relay-runtime'
+import { initializeAccounts } from './store'
+import { mockData } from './data/account'
 
 const HTTP_ENDPOINT = 'http://localhost:5000/graphql'
 
@@ -27,3 +29,4 @@ function createRelayEnvironment() {
 }
 
 export const RelayEnvironment = createRelayEnvironment()
+initializeAccounts(RelayEnvironment, mockData)
