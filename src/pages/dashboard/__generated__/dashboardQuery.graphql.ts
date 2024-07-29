@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<7412a13fc74f71712afc9eeb635ab003>>
+ * @generated SignedSource<<0a083a4579e48a4d38f019b8b340aa78>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -14,11 +14,9 @@ export type dashboardQuery$variables = {
 };
 export type dashboardQuery$data = {
   readonly account: {
-    readonly currentBalance: number;
-    readonly user: {
-      readonly name: string | null | undefined;
-    };
-  } | null | undefined;
+    readonly currentBalance: number | null | undefined;
+    readonly id: string;
+  };
 };
 export type dashboardQuery = {
   response: dashboardQuery$data;
@@ -35,69 +33,49 @@ var v0 = [
 ],
 v1 = [
   {
-    "kind": "Variable",
-    "name": "id",
-    "variableName": "id"
+    "kind": "ClientExtension",
+    "selections": [
+      {
+        "alias": null,
+        "args": [
+          {
+            "kind": "Variable",
+            "name": "id",
+            "variableName": "id"
+          }
+        ],
+        "concreteType": "Account",
+        "kind": "LinkedField",
+        "name": "account",
+        "plural": false,
+        "selections": [
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "id",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "currentBalance",
+            "storageKey": null
+          }
+        ],
+        "storageKey": null
+      }
+    ]
   }
-],
-v2 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "name",
-  "storageKey": null
-},
-v3 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "currentBalance",
-  "storageKey": null
-},
-v4 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "id",
-  "storageKey": null
-};
+];
 return {
   "fragment": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "dashboardQuery",
-    "selections": [
-      {
-        "kind": "ClientExtension",
-        "selections": [
-          {
-            "alias": null,
-            "args": (v1/*: any*/),
-            "concreteType": "Account",
-            "kind": "LinkedField",
-            "name": "account",
-            "plural": false,
-            "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "User",
-                "kind": "LinkedField",
-                "name": "user",
-                "plural": false,
-                "selections": [
-                  (v2/*: any*/)
-                ],
-                "storageKey": null
-              },
-              (v3/*: any*/)
-            ],
-            "storageKey": null
-          }
-        ]
-      }
-    ],
+    "selections": (v1/*: any*/),
     "type": "Query",
     "abstractKey": null
   },
@@ -106,39 +84,7 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "dashboardQuery",
-    "selections": [
-      {
-        "kind": "ClientExtension",
-        "selections": [
-          {
-            "alias": null,
-            "args": (v1/*: any*/),
-            "concreteType": "Account",
-            "kind": "LinkedField",
-            "name": "account",
-            "plural": false,
-            "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "User",
-                "kind": "LinkedField",
-                "name": "user",
-                "plural": false,
-                "selections": [
-                  (v2/*: any*/),
-                  (v4/*: any*/)
-                ],
-                "storageKey": null
-              },
-              (v3/*: any*/),
-              (v4/*: any*/)
-            ],
-            "storageKey": null
-          }
-        ]
-      }
-    ]
+    "selections": (v1/*: any*/)
   },
   "params": {
     "cacheID": "621d9e9fcc8252e38903e87c99080385",
@@ -151,6 +97,6 @@ return {
 };
 })();
 
-(node as any).hash = "75ef47a7379fc4261758db2cf57039de";
+(node as any).hash = "ecca152aed0ada0d732468ca63adbfb8";
 
 export default node;

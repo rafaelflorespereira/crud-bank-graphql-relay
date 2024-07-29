@@ -6,6 +6,31 @@ import { TransactionList } from 'src/components/transaction-list'
 import { Button } from 'src/components/ui/button'
 import { mockData } from 'src/data/account'
 import { dashboard1Query } from './__generated__/dashboard1Query.graphql'
+import { dashboardAccountsQuery } from './__generated__/dashboardAccountsQuery.graphql'
+import { dashboardQuery } from './__generated__/dashboardQuery.graphql'
+
+const AccountFragment = graphql`
+  fragment AccountFragment on Account {
+    id
+    user {
+      name
+    }
+    currentBalance
+    credits {
+      total
+      amount
+    }
+    debits {
+      total
+      amount
+    }
+    transactions {
+      amount
+      date
+      type
+    }
+  }
+`
 
 export default function Dashboard() {
   const {
@@ -20,24 +45,35 @@ export default function Dashboard() {
     ],
   } = mockData
 
-  // const accountQuery = graphql`
-  //   query dashboardQuery($id: ID!) {
-  //     account(id: $id) {
-  //       user {
-  //         name
-  //       }
-  //       currentBalance
-  //     }
-  //   }
-  // `
-
-  // const data = useClientQuery<dashboardQuery>(accountQuery, { id: '1' })
-  // console.log({ accountQuery: data })
+  const account = useClientQuery<dashboardQuery>(
+    graphql`
+      query dashboardQuery($id: ID!) {
+        account(id: $id) {
+          ...AccountFragment
+        }
+      }
+    `,
+    { id: 'client:Account:0' },
+  )
+  console.log({ account })
+  const accounts = useClientQuery<dashboardAccountsQuery>(
+    graphql`
+      query dashboardAccountsQuery {
+        accounts {
+          ...AccountFragment
+        }
+      }
+    `,
+    {},
+  )
+  console.log({ accounts })
   const usersData = useClientQuery<dashboard1Query>(
     graphql`
       query dashboard1Query {
         users {
+          id
           name
+          email
         }
       }
     `,

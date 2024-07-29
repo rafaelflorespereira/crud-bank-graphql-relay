@@ -31,12 +31,13 @@ type Credit implements FinancialRecord {
 type Account {
   id: ID!
   user: User!
-  currentBalance: Float!
+  currentBalance: Float
   credits: [Credit]
   debits: [Debit]
   transactions: [Transaction]
 }
 type Query {
-  account(id: ID!): Account
+  account(id: ID!): Account!
+  accounts: [Account!]!
   users: [User!]!
 }
