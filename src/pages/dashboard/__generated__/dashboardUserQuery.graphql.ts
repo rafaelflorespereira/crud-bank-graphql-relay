@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<cff71cc8a14f1fa300da0ad6d76cab25>>
+ * @generated SignedSource<<b75708320e9c13b726d46355a0bd3dc3>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,14 +9,13 @@
 // @ts-nocheck
 
 import { ClientRequest, ClientQuery } from 'relay-runtime';
+import { FragmentRefs } from "relay-runtime";
 export type dashboardUserQuery$variables = {
   userId: string;
 };
 export type dashboardUserQuery$data = {
   readonly user: {
-    readonly email: string | null | undefined;
-    readonly id: string;
-    readonly name: string | null | undefined;
+    readonly " $fragmentSpreads": FragmentRefs<"userInfoDashboardFragment">;
   };
 };
 export type dashboardUserQuery = {
@@ -34,47 +33,9 @@ var v0 = [
 ],
 v1 = [
   {
-    "kind": "ClientExtension",
-    "selections": [
-      {
-        "alias": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "id",
-            "variableName": "userId"
-          }
-        ],
-        "concreteType": "User",
-        "kind": "LinkedField",
-        "name": "user",
-        "plural": false,
-        "selections": [
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "id",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "name",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "email",
-            "storageKey": null
-          }
-        ],
-        "storageKey": null
-      }
-    ]
+    "kind": "Variable",
+    "name": "id",
+    "variableName": "userId"
   }
 ];
 return {
@@ -83,7 +44,29 @@ return {
     "kind": "Fragment",
     "metadata": null,
     "name": "dashboardUserQuery",
-    "selections": (v1/*: any*/),
+    "selections": [
+      {
+        "kind": "ClientExtension",
+        "selections": [
+          {
+            "alias": null,
+            "args": (v1/*: any*/),
+            "concreteType": "User",
+            "kind": "LinkedField",
+            "name": "user",
+            "plural": false,
+            "selections": [
+              {
+                "args": null,
+                "kind": "FragmentSpread",
+                "name": "userInfoDashboardFragment"
+              }
+            ],
+            "storageKey": null
+          }
+        ]
+      }
+    ],
     "type": "Query",
     "abstractKey": null
   },
@@ -92,7 +75,45 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "dashboardUserQuery",
-    "selections": (v1/*: any*/)
+    "selections": [
+      {
+        "kind": "ClientExtension",
+        "selections": [
+          {
+            "alias": null,
+            "args": (v1/*: any*/),
+            "concreteType": "User",
+            "kind": "LinkedField",
+            "name": "user",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "id",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "name",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "email",
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          }
+        ]
+      }
+    ]
   },
   "params": {
     "cacheID": "318c622352f41136691e8a7d9bdfabc9",
@@ -105,6 +126,6 @@ return {
 };
 })();
 
-(node as any).hash = "01b2ce1d9fbe296456365b15241721c3";
+(node as any).hash = "e801867147fc31f505009ed8ce7a70bf";
 
 export default node;

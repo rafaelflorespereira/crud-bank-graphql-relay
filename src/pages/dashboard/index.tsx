@@ -7,8 +7,8 @@ import { mockData } from 'src/data/account'
 import { dashboardAccountsQuery } from './__generated__/dashboardAccountsQuery.graphql'
 import { graphql } from 'relay-runtime'
 import { dashboardAccountQuery } from './__generated__/dashboardAccountQuery.graphql'
-import { dashboardUsersQuery } from './__generated__/dashboardUsersQuery.graphql'
 import { UserInfoDashboard } from 'src/components/user-info-dashboard'
+import { dashboardUserQuery } from './__generated__/dashboardUserQuery.graphql'
 
 const dashboardAccountFragment = graphql`
   fragment dashboardAccountFragment on Account {
@@ -60,6 +60,15 @@ const accountsQuery = graphql`
     }
   }
 `
+const userQuery = graphql`
+  query dashboardUserQuery($userId: ID!) {
+    user(id: $userId) {
+      ... on User {
+        ...userInfoDashboardFragment
+      }
+    }
+  }
+`
 
 export default function Dashboard() {
   const {
@@ -75,19 +84,19 @@ export default function Dashboard() {
   } = mockData
 
   const accountId = 'client:Account:1'
-  const userId = 'client:User:1'
+  const userId = '1'
   const account = useLazyLoadQuery<dashboardAccountQuery>(accountQuery, { accountId })
   const accounts = useClientQuery<dashboardAccountsQuery>(accountsQuery, {})
-  const users = useClientQuery<dashboardUsersQuery>(usersQuery, {})
+  const data = useLazyLoadQuery<dashboardUserQuery>(userQuery, { userId })
   console.log({
     account,
     accounts,
-    users,
+    data,
   })
 
   return (
     <main className="p-8 [&>*]:my-8">
-      <UserInfoDashboard userId={userId} />
+      <UserInfoDashboard user={data.user} />
       <section className="flex w-full flex-row flex-wrap space-x-0 md:flex-nowrap md:space-x-4">
         <DashboardCard className="w-full md:w-1/3" title={'Account Balance'} amount={currentBalance} />
         <DashboardCard

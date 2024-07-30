@@ -1,23 +1,19 @@
-import { useClientQuery } from 'react-relay'
+import { useFragment } from 'react-relay'
 import { graphql } from 'relay-runtime'
-import { dashboardUserQuery } from 'src/pages/dashboard/__generated__/dashboardUserQuery.graphql'
+import { userInfoDashboardFragment$key } from './__generated__/userInfoDashboardFragment.graphql'
 
-const userQuery = graphql`
-  query dashboardUserQuery($userId: ID!) {
-    user(id: $userId) {
-      id
-      name
-      email
-    }
+const userFragment = graphql`
+  fragment userInfoDashboardFragment on User {
+    id
+    name
+    email
   }
 `
 type UserInfoDashboardProps = {
-  userId: string
+  user: userInfoDashboardFragment$key
 }
-export function UserInfoDashboard({ userId }: UserInfoDashboardProps) {
-  const {
-    user: { name },
-  } = useClientQuery<dashboardUserQuery>(userQuery, { userId })
+export function UserInfoDashboard({ user }: UserInfoDashboardProps) {
+  const { name } = useFragment(userFragment, user)
   return (
     <section className="my-8">
       <h2 className="mb-4 text-2xl font-semibold text-white">Hello {name}</h2>
