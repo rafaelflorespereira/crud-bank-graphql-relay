@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<8c2472dc245da95709936bfedadd34a4>>
+ * @generated SignedSource<<27a4d9c58c7d91d7fb3bc0996b7be8e7>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,41 +10,57 @@
 
 import { ClientRequest, ClientQuery } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type dashboardAccountsQuery$variables = Record<PropertyKey, never>;
-export type dashboardAccountsQuery$data = {
-  readonly accounts: ReadonlyArray<{
+export type dashboardAccountQuery$variables = {
+  accountId: string;
+};
+export type dashboardAccountQuery$data = {
+  readonly account: {
     readonly __id: string;
     readonly " $fragmentSpreads": FragmentRefs<"dashboardAccountFragment">;
-  }>;
+  };
 };
-export type dashboardAccountsQuery = {
-  response: dashboardAccountsQuery$data;
-  variables: dashboardAccountsQuery$variables;
+export type dashboardAccountQuery = {
+  response: dashboardAccountQuery$data;
+  variables: dashboardAccountQuery$variables;
 };
 
 const node: ClientRequest = (function(){
-var v0 = {
+var v0 = [
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "accountId"
+  }
+],
+v1 = [
+  {
+    "kind": "Variable",
+    "name": "id",
+    "variableName": "accountId"
+  }
+],
+v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "__id",
   "storageKey": null
 },
-v1 = {
+v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
 },
-v2 = {
+v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "amount",
   "storageKey": null
 },
-v3 = [
+v5 = [
   {
     "alias": null,
     "args": null,
@@ -52,27 +68,27 @@ v3 = [
     "name": "total",
     "storageKey": null
   },
-  (v2/*: any*/)
+  (v4/*: any*/)
 ];
 return {
   "fragment": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "dashboardAccountsQuery",
+    "name": "dashboardAccountQuery",
     "selections": [
       {
         "kind": "ClientExtension",
         "selections": [
           {
             "alias": null,
-            "args": null,
+            "args": (v1/*: any*/),
             "concreteType": "Account",
             "kind": "LinkedField",
-            "name": "accounts",
-            "plural": true,
+            "name": "account",
+            "plural": false,
             "selections": [
-              (v0/*: any*/),
+              (v2/*: any*/),
               {
                 "args": null,
                 "kind": "FragmentSpread",
@@ -89,23 +105,23 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "dashboardAccountsQuery",
+    "name": "dashboardAccountQuery",
     "selections": [
       {
         "kind": "ClientExtension",
         "selections": [
           {
             "alias": null,
-            "args": null,
+            "args": (v1/*: any*/),
             "concreteType": "Account",
             "kind": "LinkedField",
-            "name": "accounts",
-            "plural": true,
+            "name": "account",
+            "plural": false,
             "selections": [
-              (v0/*: any*/),
-              (v1/*: any*/),
+              (v2/*: any*/),
+              (v3/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -121,7 +137,7 @@ return {
                     "name": "name",
                     "storageKey": null
                   },
-                  (v1/*: any*/)
+                  (v3/*: any*/)
                 ],
                 "storageKey": null
               },
@@ -139,7 +155,7 @@ return {
                 "kind": "LinkedField",
                 "name": "credits",
                 "plural": true,
-                "selections": (v3/*: any*/),
+                "selections": (v5/*: any*/),
                 "storageKey": null
               },
               {
@@ -149,7 +165,7 @@ return {
                 "kind": "LinkedField",
                 "name": "debits",
                 "plural": true,
-                "selections": (v3/*: any*/),
+                "selections": (v5/*: any*/),
                 "storageKey": null
               },
               {
@@ -160,7 +176,7 @@ return {
                 "name": "transactions",
                 "plural": true,
                 "selections": [
-                  (v2/*: any*/),
+                  (v4/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -175,7 +191,7 @@ return {
                     "name": "type",
                     "storageKey": null
                   },
-                  (v1/*: any*/)
+                  (v3/*: any*/)
                 ],
                 "storageKey": null
               }
@@ -187,16 +203,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "3de14903d911caf4e11fbde7d4817ae4",
+    "cacheID": "e0ba57bf9ec2466ba5da769041af47a6",
     "id": null,
     "metadata": {},
-    "name": "dashboardAccountsQuery",
+    "name": "dashboardAccountQuery",
     "operationKind": "query",
     "text": null
   }
 };
 })();
 
-(node as any).hash = "ba5dd62d41fff42b81b7b7d62a0a6e8f";
+(node as any).hash = "da730b051b87d8a340e23e1566e3aaa9";
 
 export default node;

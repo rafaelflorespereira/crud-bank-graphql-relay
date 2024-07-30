@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0a083a4579e48a4d38f019b8b340aa78>>
+ * @generated SignedSource<<cff71cc8a14f1fa300da0ad6d76cab25>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,18 +9,19 @@
 // @ts-nocheck
 
 import { ClientRequest, ClientQuery } from 'relay-runtime';
-export type dashboardQuery$variables = {
-  id: string;
+export type dashboardUserQuery$variables = {
+  userId: string;
 };
-export type dashboardQuery$data = {
-  readonly account: {
-    readonly currentBalance: number | null | undefined;
+export type dashboardUserQuery$data = {
+  readonly user: {
+    readonly email: string | null | undefined;
     readonly id: string;
+    readonly name: string | null | undefined;
   };
 };
-export type dashboardQuery = {
-  response: dashboardQuery$data;
-  variables: dashboardQuery$variables;
+export type dashboardUserQuery = {
+  response: dashboardUserQuery$data;
+  variables: dashboardUserQuery$variables;
 };
 
 const node: ClientRequest = (function(){
@@ -28,7 +29,7 @@ var v0 = [
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "id"
+    "name": "userId"
   }
 ],
 v1 = [
@@ -41,12 +42,12 @@ v1 = [
           {
             "kind": "Variable",
             "name": "id",
-            "variableName": "id"
+            "variableName": "userId"
           }
         ],
-        "concreteType": "Account",
+        "concreteType": "User",
         "kind": "LinkedField",
-        "name": "account",
+        "name": "user",
         "plural": false,
         "selections": [
           {
@@ -60,7 +61,14 @@ v1 = [
             "alias": null,
             "args": null,
             "kind": "ScalarField",
-            "name": "currentBalance",
+            "name": "name",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "email",
             "storageKey": null
           }
         ],
@@ -74,7 +82,7 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "dashboardQuery",
+    "name": "dashboardUserQuery",
     "selections": (v1/*: any*/),
     "type": "Query",
     "abstractKey": null
@@ -83,20 +91,20 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "dashboardQuery",
+    "name": "dashboardUserQuery",
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "621d9e9fcc8252e38903e87c99080385",
+    "cacheID": "318c622352f41136691e8a7d9bdfabc9",
     "id": null,
     "metadata": {},
-    "name": "dashboardQuery",
+    "name": "dashboardUserQuery",
     "operationKind": "query",
     "text": null
   }
 };
 })();
 
-(node as any).hash = "ecca152aed0ada0d732468ca63adbfb8";
+(node as any).hash = "01b2ce1d9fbe296456365b15241721c3";
 
 export default node;

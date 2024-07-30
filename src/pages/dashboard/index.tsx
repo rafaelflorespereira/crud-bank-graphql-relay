@@ -1,16 +1,17 @@
-import { useClientQuery } from 'react-relay'
-import { graphql } from 'relay-runtime'
+import { useClientQuery, useLazyLoadQuery } from 'react-relay'
 import { DashboardCard } from 'src/components/dashboard-card'
 import { TransactionBarChart } from 'src/components/transaction-bar-chart'
 import { TransactionList } from 'src/components/transaction-list'
 import { Button } from 'src/components/ui/button'
 import { mockData } from 'src/data/account'
-import { dashboard1Query } from './__generated__/dashboard1Query.graphql'
 import { dashboardAccountsQuery } from './__generated__/dashboardAccountsQuery.graphql'
-import { dashboardQuery } from './__generated__/dashboardQuery.graphql'
+import { graphql } from 'relay-runtime'
+import { dashboardAccountQuery } from './__generated__/dashboardAccountQuery.graphql'
+import { dashboardUsersQuery } from './__generated__/dashboardUsersQuery.graphql'
+import { UserInfoDashboard } from 'src/components/user-info-dashboard'
 
-const AccountFragment = graphql`
-  fragment AccountFragment on Account {
+const dashboardAccountFragment = graphql`
+  fragment dashboardAccountFragment on Account {
     id
     user {
       name
@@ -32,6 +33,34 @@ const AccountFragment = graphql`
   }
 `
 
+const usersQuery = graphql`
+  query dashboardUsersQuery {
+    users {
+      id
+      name
+      email
+    }
+  }
+`
+
+const accountQuery = graphql`
+  query dashboardAccountQuery($accountId: ID!) {
+    account(id: $accountId) {
+      __id
+      ...dashboardAccountFragment
+    }
+  }
+`
+
+const accountsQuery = graphql`
+  query dashboardAccountsQuery {
+    accounts {
+      __id
+      ...dashboardAccountFragment
+    }
+  }
+`
+
 export default function Dashboard() {
   const {
     accounts: [
@@ -45,48 +74,20 @@ export default function Dashboard() {
     ],
   } = mockData
 
-  const account = useClientQuery<dashboardQuery>(
-    graphql`
-      query dashboardQuery($id: ID!) {
-        account(id: $id) {
-          ...AccountFragment
-        }
-      }
-    `,
-    { id: 'client:Account:0' },
-  )
-  console.log({ account })
-  const accounts = useClientQuery<dashboardAccountsQuery>(
-    graphql`
-      query dashboardAccountsQuery {
-        accounts {
-          ...AccountFragment
-        }
-      }
-    `,
-    {},
-  )
-  console.log({ accounts })
-  const usersData = useClientQuery<dashboard1Query>(
-    graphql`
-      query dashboard1Query {
-        users {
-          id
-          name
-          email
-        }
-      }
-    `,
-    {},
-  )
-  console.log({ usersData })
+  const accountId = 'client:Account:1'
+  const userId = 'client:User:1'
+  const account = useLazyLoadQuery<dashboardAccountQuery>(accountQuery, { accountId })
+  const accounts = useClientQuery<dashboardAccountsQuery>(accountsQuery, {})
+  const users = useClientQuery<dashboardUsersQuery>(usersQuery, {})
+  console.log({
+    account,
+    accounts,
+    users,
+  })
 
   return (
     <main className="p-8 [&>*]:my-8">
-      <section className="my-8">
-        <h2 className="mb-4 text-2xl font-semibold text-white">Hello {name}</h2>
-      </section>
-
+      <UserInfoDashboard userId={userId} />
       <section className="flex w-full flex-row flex-wrap space-x-0 md:flex-nowrap md:space-x-4">
         <DashboardCard className="w-full md:w-1/3" title={'Account Balance'} amount={currentBalance} />
         <DashboardCard
@@ -101,7 +102,10 @@ export default function Dashboard() {
           amount={credits.amount}
           type="credit"
         />
-        <Button className="order-2 my-4 w-full self-center uppercase md:order-4 md:my-0 md:text-xl lg:w-1/4">
+        <Button
+          className="order-2 my-4 w-full self-center uppercase md:order-4 md:my-0 md:text-xl lg:w-1/4"
+          onClick={() => console.log('')}
+        >
           Transfer Money
         </Button>
       </section>

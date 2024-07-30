@@ -40,4 +40,5 @@ type Query {
   account(id: ID!): Account!
   accounts: [Account!]!
   users: [User!]!
+  user(id: ID!): User!
 }

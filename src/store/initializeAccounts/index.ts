@@ -13,7 +13,7 @@ const createUser = (store: RecordSourceSelectorProxy, user: User, id: number) =>
 const createAccount = (store: RecordSourceSelectorProxy, account: Account, id: number) => {
   const accountId = `client:Account:${id++}`
   const accountNode = store.create(accountId, 'Account')
-  accountNode.setValue(accountId, 'id')
+  accountNode.setValue(id, 'id')
   accountNode.setValue(account.accountNumber, 'accountNumber')
   accountNode.setValue(account.currentBalance, 'currentBalance')
   return accountNode

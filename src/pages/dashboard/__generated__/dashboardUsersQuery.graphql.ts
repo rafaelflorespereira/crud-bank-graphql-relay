@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<7ef5da923d6e2f007f05fc1c17948344>>
+ * @generated SignedSource<<fc43b9194010b7ec8908a8345062c177>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,17 +9,17 @@
 // @ts-nocheck
 
 import { ClientRequest, ClientQuery } from 'relay-runtime';
-export type dashboard1Query$variables = Record<PropertyKey, never>;
-export type dashboard1Query$data = {
+export type dashboardUsersQuery$variables = Record<PropertyKey, never>;
+export type dashboardUsersQuery$data = {
   readonly users: ReadonlyArray<{
     readonly email: string | null | undefined;
     readonly id: string;
     readonly name: string | null | undefined;
   }>;
 };
-export type dashboard1Query = {
-  response: dashboard1Query$data;
-  variables: dashboard1Query$variables;
+export type dashboardUsersQuery = {
+  response: dashboardUsersQuery$data;
+  variables: dashboardUsersQuery$variables;
 };
 
 const node: ClientRequest = (function(){
@@ -67,7 +67,7 @@ return {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "dashboard1Query",
+    "name": "dashboardUsersQuery",
     "selections": (v0/*: any*/),
     "type": "Query",
     "abstractKey": null
@@ -76,20 +76,20 @@ return {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "dashboard1Query",
+    "name": "dashboardUsersQuery",
     "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "bce2b277ac9e5f5ede8074cea69e6c9d",
+    "cacheID": "2a6d49f1e3f03fc006fefbf2dd2d1d22",
     "id": null,
     "metadata": {},
-    "name": "dashboard1Query",
+    "name": "dashboardUsersQuery",
     "operationKind": "query",
     "text": null
   }
 };
 })();
 
-(node as any).hash = "c859002e4f0674e804fc0074f3cc4895";
+(node as any).hash = "03420517d288ee6fcb61856dfcf5929c";
 
 export default node;
