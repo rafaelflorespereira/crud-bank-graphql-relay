@@ -9,14 +9,13 @@ const userFragment = graphql`
     email
   }
 `
-type UserInfoDashboardProps = {
-  user: userInfoDashboardFragment$key
-}
-export function UserInfoDashboard({ user }: UserInfoDashboardProps) {
-  const { name } = useFragment(userFragment, user)
+
+export function UserInfoDashboard({ user }: { user: userInfoDashboardFragment$key | undefined | null }) {
+  const data = useFragment(userFragment, user)
+  console.log({ data })
   return (
     <section className="my-8">
-      <h2 className="mb-4 text-2xl font-semibold text-white">Hello {name}</h2>
+      <h3 className="mb-4 text-2xl font-semibold text-white">Hello {data?.name}</h3>
     </section>
   )
 }

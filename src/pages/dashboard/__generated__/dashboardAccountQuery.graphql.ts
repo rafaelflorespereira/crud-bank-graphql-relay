@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<27a4d9c58c7d91d7fb3bc0996b7be8e7>>
+ * @generated SignedSource<<cf1d71a0680a96fd7c0d797dffd79c86>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -14,10 +14,9 @@ export type dashboardAccountQuery$variables = {
   accountId: string;
 };
 export type dashboardAccountQuery$data = {
-  readonly account: {
-    readonly __id: string;
+  readonly node: {
     readonly " $fragmentSpreads": FragmentRefs<"dashboardAccountFragment">;
-  };
+  } | null | undefined;
 };
 export type dashboardAccountQuery = {
   response: dashboardAccountQuery$data;
@@ -43,24 +42,17 @@ v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "__id",
+  "name": "id",
   "storageKey": null
 },
 v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "id",
-  "storageKey": null
-},
-v4 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
   "name": "amount",
   "storageKey": null
 },
-v5 = [
+v4 = [
   {
     "alias": null,
     "args": null,
@@ -68,7 +60,7 @@ v5 = [
     "name": "total",
     "storageKey": null
   },
-  (v4/*: any*/)
+  (v3/*: any*/)
 ];
 return {
   "fragment": {
@@ -83,16 +75,22 @@ return {
           {
             "alias": null,
             "args": (v1/*: any*/),
-            "concreteType": "Account",
+            "concreteType": null,
             "kind": "LinkedField",
-            "name": "account",
+            "name": "node",
             "plural": false,
             "selections": [
-              (v2/*: any*/),
               {
-                "args": null,
-                "kind": "FragmentSpread",
-                "name": "dashboardAccountFragment"
+                "kind": "InlineFragment",
+                "selections": [
+                  {
+                    "args": null,
+                    "kind": "FragmentSpread",
+                    "name": "dashboardAccountFragment"
+                  }
+                ],
+                "type": "Account",
+                "abstractKey": null
               }
             ],
             "storageKey": null
@@ -115,85 +113,98 @@ return {
           {
             "alias": null,
             "args": (v1/*: any*/),
-            "concreteType": "Account",
+            "concreteType": null,
             "kind": "LinkedField",
-            "name": "account",
+            "name": "node",
             "plural": false,
             "selections": [
-              (v2/*: any*/),
-              (v3/*: any*/),
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "User",
-                "kind": "LinkedField",
-                "name": "user",
-                "plural": false,
-                "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "name",
-                    "storageKey": null
-                  },
-                  (v3/*: any*/)
-                ],
-                "storageKey": null
-              },
               {
                 "alias": null,
                 "args": null,
                 "kind": "ScalarField",
-                "name": "currentBalance",
+                "name": "__typename",
                 "storageKey": null
               },
+              (v2/*: any*/),
               {
-                "alias": null,
-                "args": null,
-                "concreteType": "Credit",
-                "kind": "LinkedField",
-                "name": "credits",
-                "plural": true,
-                "selections": (v5/*: any*/),
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "Debit",
-                "kind": "LinkedField",
-                "name": "debits",
-                "plural": true,
-                "selections": (v5/*: any*/),
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "Transaction",
-                "kind": "LinkedField",
-                "name": "transactions",
-                "plural": true,
+                "kind": "InlineFragment",
                 "selections": [
-                  (v4/*: any*/),
                   {
                     "alias": null,
                     "args": null,
-                    "kind": "ScalarField",
-                    "name": "date",
+                    "concreteType": "User",
+                    "kind": "LinkedField",
+                    "name": "user",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "name",
+                        "storageKey": null
+                      },
+                      (v2/*: any*/)
+                    ],
                     "storageKey": null
                   },
                   {
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
-                    "name": "type",
+                    "name": "currentBalance",
                     "storageKey": null
                   },
-                  (v3/*: any*/)
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Credit",
+                    "kind": "LinkedField",
+                    "name": "credits",
+                    "plural": true,
+                    "selections": (v4/*: any*/),
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Debit",
+                    "kind": "LinkedField",
+                    "name": "debits",
+                    "plural": true,
+                    "selections": (v4/*: any*/),
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Transaction",
+                    "kind": "LinkedField",
+                    "name": "transactions",
+                    "plural": true,
+                    "selections": [
+                      (v3/*: any*/),
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "date",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "type",
+                        "storageKey": null
+                      },
+                      (v2/*: any*/)
+                    ],
+                    "storageKey": null
+                  }
                 ],
-                "storageKey": null
+                "type": "Account",
+                "abstractKey": null
               }
             ],
             "storageKey": null
@@ -213,6 +224,6 @@ return {
 };
 })();
 
-(node as any).hash = "da730b051b87d8a340e23e1566e3aaa9";
+(node as any).hash = "22431421b18feeb57e80c659fc83eee0";
 
 export default node;

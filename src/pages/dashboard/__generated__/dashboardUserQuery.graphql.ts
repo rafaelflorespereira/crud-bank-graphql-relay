@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b75708320e9c13b726d46355a0bd3dc3>>
+ * @generated SignedSource<<8d17b41b0554a38cd263722fb01e2baf>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,13 +10,12 @@
 
 import { ClientRequest, ClientQuery } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type dashboardUserQuery$variables = {
-  userId: string;
-};
+export type dashboardUserQuery$variables = Record<PropertyKey, never>;
 export type dashboardUserQuery$data = {
-  readonly user: {
+  readonly node: {
+    readonly __id?: string;
     readonly " $fragmentSpreads": FragmentRefs<"userInfoDashboardFragment">;
-  };
+  } | null | undefined;
 };
 export type dashboardUserQuery = {
   response: dashboardUserQuery$data;
@@ -26,21 +25,21 @@ export type dashboardUserQuery = {
 const node: ClientRequest = (function(){
 var v0 = [
   {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "userId"
+    "kind": "Literal",
+    "name": "id",
+    "value": 1
   }
 ],
-v1 = [
-  {
-    "kind": "Variable",
-    "name": "id",
-    "variableName": "userId"
-  }
-];
+v1 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "__id",
+  "storageKey": null
+};
 return {
   "fragment": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
     "name": "dashboardUserQuery",
@@ -50,19 +49,27 @@ return {
         "selections": [
           {
             "alias": null,
-            "args": (v1/*: any*/),
-            "concreteType": "User",
+            "args": (v0/*: any*/),
+            "concreteType": null,
             "kind": "LinkedField",
-            "name": "user",
+            "name": "node",
             "plural": false,
             "selections": [
               {
-                "args": null,
-                "kind": "FragmentSpread",
-                "name": "userInfoDashboardFragment"
+                "kind": "InlineFragment",
+                "selections": [
+                  (v1/*: any*/),
+                  {
+                    "args": null,
+                    "kind": "FragmentSpread",
+                    "name": "userInfoDashboardFragment"
+                  }
+                ],
+                "type": "User",
+                "abstractKey": null
               }
             ],
-            "storageKey": null
+            "storageKey": "node(id:1)"
           }
         ]
       }
@@ -72,7 +79,7 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [],
     "kind": "Operation",
     "name": "dashboardUserQuery",
     "selections": [
@@ -81,12 +88,19 @@ return {
         "selections": [
           {
             "alias": null,
-            "args": (v1/*: any*/),
-            "concreteType": "User",
+            "args": (v0/*: any*/),
+            "concreteType": null,
             "kind": "LinkedField",
-            "name": "user",
+            "name": "node",
             "plural": false,
             "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "__typename",
+                "storageKey": null
+              },
               {
                 "alias": null,
                 "args": null,
@@ -95,21 +109,29 @@ return {
                 "storageKey": null
               },
               {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "name",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "email",
-                "storageKey": null
+                "kind": "InlineFragment",
+                "selections": [
+                  (v1/*: any*/),
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "name",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "email",
+                    "storageKey": null
+                  }
+                ],
+                "type": "User",
+                "abstractKey": null
               }
             ],
-            "storageKey": null
+            "storageKey": "node(id:1)"
           }
         ]
       }
@@ -126,6 +148,6 @@ return {
 };
 })();
 
-(node as any).hash = "e801867147fc31f505009ed8ce7a70bf";
+(node as any).hash = "9c4e25cd90c798cc6f6c79f8ee4a0e3d";
 
 export default node;

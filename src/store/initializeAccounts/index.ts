@@ -4,7 +4,7 @@ import { Account, User } from 'src/interfaces'
 const createUser = (store: RecordSourceSelectorProxy, user: User, id: number) => {
   const userId = `client:User:${id++}`
   const userNode = store.create(userId, 'User')
-  userNode.setValue(userId, 'id')
+  userNode.setValue(id, 'id')
   userNode.setValue(user.name, 'name')
   userNode.setValue(user.email, 'email')
   return userNode

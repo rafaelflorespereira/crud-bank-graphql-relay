@@ -17,6 +17,7 @@ const fetchFn: FetchFunction = async (request, variables) => {
       variables,
     }),
   })
+  console.log('store initialized')
 
   return await resp.json()
 }

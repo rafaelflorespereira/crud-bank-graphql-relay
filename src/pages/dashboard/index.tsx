@@ -7,6 +7,7 @@ import { mockData } from 'src/data/account'
 import { dashboardAccountsQuery } from './__generated__/dashboardAccountsQuery.graphql'
 import { graphql } from 'relay-runtime'
 import { dashboardAccountQuery } from './__generated__/dashboardAccountQuery.graphql'
+import { dashboardUsersQuery } from './__generated__/dashboardUsersQuery.graphql'
 import { UserInfoDashboard } from 'src/components/user-info-dashboard'
 import { dashboardUserQuery } from './__generated__/dashboardUserQuery.graphql'
 
@@ -32,7 +33,6 @@ const dashboardAccountFragment = graphql`
     }
   }
 `
-
 const usersQuery = graphql`
   query dashboardUsersQuery {
     users {
@@ -45,9 +45,10 @@ const usersQuery = graphql`
 
 const accountQuery = graphql`
   query dashboardAccountQuery($accountId: ID!) {
-    account(id: $accountId) {
-      __id
-      ...dashboardAccountFragment
+    node(id: $accountId) {
+      ... on Account {
+        ...dashboardAccountFragment
+      }
     }
   }
 `
@@ -61,9 +62,10 @@ const accountsQuery = graphql`
   }
 `
 const userQuery = graphql`
-  query dashboardUserQuery($userId: ID!) {
-    user(id: $userId) {
+  query dashboardUserQuery {
+    node(id: 1) {
       ... on User {
+        __id
         ...userInfoDashboardFragment
       }
     }
@@ -72,31 +74,26 @@ const userQuery = graphql`
 
 export default function Dashboard() {
   const {
-    accounts: [
-      {
-        user: { name },
-        currentBalance,
-        credits,
-        debits,
-        transactions,
-      },
-    ],
+    accounts: [{ currentBalance, credits, debits, transactions }],
   } = mockData
 
   const accountId = 'client:Account:1'
-  const userId = '1'
+  const userId = 'client:User:1'
   const account = useLazyLoadQuery<dashboardAccountQuery>(accountQuery, { accountId })
   const accounts = useClientQuery<dashboardAccountsQuery>(accountsQuery, {})
-  const data = useLazyLoadQuery<dashboardUserQuery>(userQuery, { userId })
+  const data = useClientQuery<dashboardUserQuery>(userQuery, {})
+  const users = useClientQuery<dashboardUsersQuery>(usersQuery, {})
   console.log({
     account,
     accounts,
+    users,
     data,
   })
 
   return (
     <main className="p-8 [&>*]:my-8">
-      <UserInfoDashboard user={data.user} />
+      <UserInfoDashboard user={data.node} />
+      <button>click</button>
       <section className="flex w-full flex-row flex-wrap space-x-0 md:flex-nowrap md:space-x-4">
         <DashboardCard className="w-full md:w-1/3" title={'Account Balance'} amount={currentBalance} />
         <DashboardCard

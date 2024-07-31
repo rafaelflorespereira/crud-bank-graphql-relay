@@ -1,10 +1,13 @@
 # Replace this with your own GraphQL schema file!
-type User {
+interface Node {
+  id: ID!
+}
+type User implements Node {
   id: ID!
   name: String
   email: String
 }
-type Transaction {
+type Transaction implements Node {
   id: ID!
   amount: Float!
   type: String!
@@ -28,7 +31,7 @@ type Credit implements FinancialRecord {
   total: Float!
   transactions: [Transaction]
 }
-type Account {
+type Account implements Node {
   id: ID!
   user: User!
   currentBalance: Float
@@ -37,8 +40,7 @@ type Account {
   transactions: [Transaction]
 }
 type Query {
-  account(id: ID!): Account!
+  node(id: ID!): Node
   accounts: [Account!]!
   users: [User!]!
-  user(id: ID!): User!
 }
