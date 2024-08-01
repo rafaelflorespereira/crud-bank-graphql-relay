@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<254de7b370b7dab33bb7efdfb1fe5e7c>>
+ * @generated SignedSource<<7f8f4c63026d1db1b75e7676a91ba409>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,16 +10,16 @@
 
 import { ClientRequest, ClientQuery } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type dashboardAccountsQuery$variables = Record<PropertyKey, never>;
-export type dashboardAccountsQuery$data = {
+export type transferenceQuery$variables = Record<PropertyKey, never>;
+export type transferenceQuery$data = {
   readonly accounts: ReadonlyArray<{
     readonly __id: string;
     readonly " $fragmentSpreads": FragmentRefs<"dashboardAccountFragment">;
   }>;
 };
-export type dashboardAccountsQuery = {
-  response: dashboardAccountsQuery$data;
-  variables: dashboardAccountsQuery$variables;
+export type transferenceQuery = {
+  response: transferenceQuery$data;
+  variables: transferenceQuery$variables;
 };
 
 const node: ClientRequest = (function(){
@@ -59,7 +59,7 @@ return {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "dashboardAccountsQuery",
+    "name": "transferenceQuery",
     "selections": [
       {
         "kind": "ClientExtension",
@@ -91,7 +91,7 @@ return {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "dashboardAccountsQuery",
+    "name": "transferenceQuery",
     "selections": [
       {
         "kind": "ClientExtension",
@@ -187,16 +187,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "3de14903d911caf4e11fbde7d4817ae4",
+    "cacheID": "592a7fd3551c0efd7591968eae4d9d0d",
     "id": null,
     "metadata": {},
-    "name": "dashboardAccountsQuery",
+    "name": "transferenceQuery",
     "operationKind": "query",
     "text": null
   }
 };
 })();
 
-(node as any).hash = "ba5dd62d41fff42b81b7b7d62a0a6e8f";
+(node as any).hash = "7fec7cf490222fb4f66028a70ad2ead0";
 
 export default node;

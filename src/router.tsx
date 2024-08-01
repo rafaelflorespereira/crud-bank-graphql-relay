@@ -16,7 +16,7 @@ export const routerObjects: RouteObject[] = [
     Component: Dashboard,
   },
   {
-    path: '/transference',
+    path: '/transference/:accountId',
     Component: Transference,
   },
 ]

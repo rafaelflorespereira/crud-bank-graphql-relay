@@ -1,22 +1,28 @@
-import { useRelayEnvironment } from 'react-relay'
-import { graphql } from 'relay-runtime'
+import { graphql, useClientQuery, useRelayEnvironment } from 'react-relay'
 import { commitTransactionCreateLocally } from 'src/store/mutations/createTransaction'
+import { transferenceQuery as QueryType } from './__generated__/transferenceQuery.graphql'
+import { useParams } from 'react-router-dom'
 
-const createTransactionMutation = graphql`
-  mutation transferenceMutation($input: CreateTransactionInput!) {
-    createTransference(input: $input) {
-      id
+const accountsQuery = graphql`
+  query transferenceQuery {
+    accounts {
+      __id
+      ...dashboardAccountFragment
     }
   }
 `
 export function Transference() {
+  const accounts = useClientQuery<QueryType>(accountsQuery, {})
   const environment = useRelayEnvironment()
+  const params = useParams()
   return (
     <div>
+      {/* Select Account */}
+      {/* Select Amount  */}
       <button
         onClick={() => {
           commitTransactionCreateLocally(environment, {
-            fromId: 'client:Account:1',
+            fromId: params.accountId ?? '',
             toId: 'client:Account:2',
             amount: 100,
           })

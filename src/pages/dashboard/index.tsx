@@ -4,12 +4,11 @@ import { TransactionBarChart } from 'src/components/transaction-bar-chart'
 import { TransactionList } from 'src/components/transaction-list'
 import { Button } from 'src/components/ui/button'
 import { mockData } from 'src/data/account'
-import { dashboardAccountsQuery } from './__generated__/dashboardAccountsQuery.graphql'
 import { graphql } from 'relay-runtime'
 import { dashboardAccountQuery } from './__generated__/dashboardAccountQuery.graphql'
-import { dashboardUsersQuery } from './__generated__/dashboardUsersQuery.graphql'
 import { UserInfoDashboard } from 'src/components/user-info-dashboard'
 import { dashboardUserQuery } from './__generated__/dashboardUserQuery.graphql'
+import { useNavigate } from 'react-router-dom'
 
 const dashboardAccountFragment = graphql`
   fragment dashboardAccountFragment on Account {
@@ -33,15 +32,6 @@ const dashboardAccountFragment = graphql`
     }
   }
 `
-const usersQuery = graphql`
-  query dashboardUsersQuery {
-    users {
-      id
-      name
-      email
-    }
-  }
-`
 
 const accountQuery = graphql`
   query dashboardAccountQuery($accountId: ID!) {
@@ -53,14 +43,6 @@ const accountQuery = graphql`
   }
 `
 
-const accountsQuery = graphql`
-  query dashboardAccountsQuery {
-    accounts {
-      __id
-      ...dashboardAccountFragment
-    }
-  }
-`
 const userQuery = graphql`
   query dashboardUserQuery {
     node(id: 1) {
@@ -71,24 +53,16 @@ const userQuery = graphql`
     }
   }
 `
-
 export default function Dashboard() {
   const {
     accounts: [{ currentBalance, credits, debits, transactions }],
   } = mockData
 
   const accountId = 'client:Account:1'
-  const userId = 'client:User:1'
   const account = useLazyLoadQuery<dashboardAccountQuery>(accountQuery, { accountId })
-  const accounts = useClientQuery<dashboardAccountsQuery>(accountsQuery, {})
   const data = useClientQuery<dashboardUserQuery>(userQuery, {})
-  const users = useClientQuery<dashboardUsersQuery>(usersQuery, {})
-  console.log({
-    account,
-    accounts,
-    users,
-    data,
-  })
+
+  const navigate = useNavigate()
 
   return (
     <main className="p-8 [&>*]:my-8">
@@ -109,7 +83,7 @@ export default function Dashboard() {
         />
         <Button
           className="order-2 my-4 w-full self-center uppercase md:order-4 md:my-0 md:text-xl lg:w-1/4"
-          onClick={() => console.log('')}
+          onClick={() => navigate(`/transference/${accountId}`)}
         >
           Transfer Money
         </Button>
