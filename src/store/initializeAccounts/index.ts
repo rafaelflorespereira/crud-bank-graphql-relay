@@ -16,6 +16,19 @@ const createAccount = (store: RecordSourceSelectorProxy, account: Account, id: n
   accountNode.setValue(id, 'id')
   accountNode.setValue(account.accountNumber, 'accountNumber')
   accountNode.setValue(account.currentBalance, 'currentBalance')
+
+  const debits = store.create(`client:Debits:${id}`, 'Debits')
+  debits.setValue(0, 'amount')
+  debits.setValue(0, 'total')
+  debits.setLinkedRecords([], 'transactions')
+
+  const credits = store.create(`client:Credits:${id}`, 'Credits')
+  credits.setValue(0, 'amount')
+  credits.setValue(0, 'total')
+  credits.setLinkedRecords([], 'transactions')
+
+  accountNode.setLinkedRecord(debits, 'debits')
+  accountNode.setLinkedRecord(credits, 'credits')
   return accountNode
 }
 

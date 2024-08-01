@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<8c2472dc245da95709936bfedadd34a4>>
+ * @generated SignedSource<<254de7b370b7dab33bb7efdfb1fe5e7c>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -138,7 +138,7 @@ return {
                 "concreteType": "Credit",
                 "kind": "LinkedField",
                 "name": "credits",
-                "plural": true,
+                "plural": false,
                 "selections": (v3/*: any*/),
                 "storageKey": null
               },
@@ -148,7 +148,7 @@ return {
                 "concreteType": "Debit",
                 "kind": "LinkedField",
                 "name": "debits",
-                "plural": true,
+                "plural": false,
                 "selections": (v3/*: any*/),
                 "storageKey": null
               },

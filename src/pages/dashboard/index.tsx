@@ -93,7 +93,6 @@ export default function Dashboard() {
   return (
     <main className="p-8 [&>*]:my-8">
       <UserInfoDashboard user={data.node} />
-      <button>click</button>
       <section className="flex w-full flex-row flex-wrap space-x-0 md:flex-nowrap md:space-x-4">
         <DashboardCard className="w-full md:w-1/3" title={'Account Balance'} amount={currentBalance} />
         <DashboardCard

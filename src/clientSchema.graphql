@@ -7,26 +7,29 @@ type User implements Node {
   name: String
   email: String
 }
-type Transaction implements Node {
+type Transaction {
   id: ID!
   amount: Float!
-  type: String!
-  date: String!
+  type: String
+  date: String
   description: String
   from: User
   to: User
 }
 interface FinancialRecord {
+  accountId: ID!
   amount: Float!
   total: Float!
   transactions: [Transaction]
 }
 type Debit implements FinancialRecord {
+  accountId: ID!
   amount: Float!
   total: Float!
   transactions: [Transaction]
 }
 type Credit implements FinancialRecord {
+  accountId: ID!
   amount: Float!
   total: Float!
   transactions: [Transaction]
@@ -35,12 +38,22 @@ type Account implements Node {
   id: ID!
   user: User!
   currentBalance: Float
-  credits: [Credit]
-  debits: [Debit]
+  credits: Credit
+  debits: Debit
   transactions: [Transaction]
 }
 type Query {
   node(id: ID!): Node
   accounts: [Account!]!
   users: [User!]!
+}
+
+input CreateTransactionInput {
+  fromId: ID!
+  toId: ID!
+  amount: Float!
+}
+
+type Mutation {
+  createTransference(input: CreateTransactionInput!): Transaction
 }

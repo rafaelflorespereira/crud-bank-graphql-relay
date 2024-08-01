@@ -4,6 +4,7 @@ import ErrorPage from './components/error-page'
 import { getDefaultLayout } from './components/layout'
 import Login from './pages/login'
 import Dashboard from './pages/dashboard'
+import { Transference } from './pages/transference'
 
 export const routerObjects: RouteObject[] = [
   {
@@ -13,6 +14,10 @@ export const routerObjects: RouteObject[] = [
   {
     path: '/dashboard',
     Component: Dashboard,
+  },
+  {
+    path: '/transference',
+    Component: Transference,
   },
 ]
 

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<e889f8aef281766c60e444b8eba8820f>>
+ * @generated SignedSource<<ec314c83f17d2aae0424b0bc3299025e>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,20 +11,20 @@
 import { Fragment, ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type dashboardAccountFragment$data = {
-  readonly credits: ReadonlyArray<{
+  readonly credits: {
     readonly amount: number;
     readonly total: number;
-  } | null | undefined> | null | undefined;
+  } | null | undefined;
   readonly currentBalance: number | null | undefined;
-  readonly debits: ReadonlyArray<{
+  readonly debits: {
     readonly amount: number;
     readonly total: number;
-  } | null | undefined> | null | undefined;
+  } | null | undefined;
   readonly id: string;
   readonly transactions: ReadonlyArray<{
     readonly amount: number;
-    readonly date: string;
-    readonly type: string;
+    readonly date: string | null | undefined;
+    readonly type: string | null | undefined;
   } | null | undefined> | null | undefined;
   readonly user: {
     readonly name: string | null | undefined;
@@ -101,7 +101,7 @@ return {
           "concreteType": "Credit",
           "kind": "LinkedField",
           "name": "credits",
-          "plural": true,
+          "plural": false,
           "selections": (v1/*: any*/),
           "storageKey": null
         },
@@ -111,7 +111,7 @@ return {
           "concreteType": "Debit",
           "kind": "LinkedField",
           "name": "debits",
-          "plural": true,
+          "plural": false,
           "selections": (v1/*: any*/),
           "storageKey": null
         },
